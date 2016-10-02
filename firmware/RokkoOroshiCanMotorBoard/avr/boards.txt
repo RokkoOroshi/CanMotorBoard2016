@@ -1,0 +1,21 @@
+oroshi_can_md_standard.name=RokkoOroshi Can Motor Board
+
+oroshi_can_md_standard.upload.tool=arduino:avrdude
+oroshi_can_md_standard.upload.protocol=arduino
+oroshi_can_md_standard.upload.maximum_size=30720
+oroshi_can_md_standard.upload.maximum_data_size=2048
+oroshi_can_md_standard.upload.speed=115200
+
+oroshi_can_md_standard.bootloader.tool=arduino:avrdude
+oroshi_can_md_standard.bootloader.unlock_bits=0x3F
+oroshi_can_md_standard.bootloader.lock_bits=0x0F
+oroshi_can_md_standard.bootloader.low_fuses=0xff
+oroshi_can_md_standard.bootloader.high_fuses=0xda
+oroshi_can_md_standard.bootloader.extended_fuses=0x05
+oroshi_can_md_standard.bootloader.file=optiboot_atmega328.hex
+
+oroshi_can_md_standard.build.board=AVR_PRO
+oroshi_can_md_standard.build.core=arduino:arduino
+oroshi_can_md_standard.build.variant=can_md_standard
+oroshi_can_md_standard.build.mcu=atmega328p
+oroshi_can_md_standard.build.f_cpu=16000000L

@@ -1,0 +1,71 @@
+<html>
+	<head>
+		<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<h1>4WD ロボット　動作テスト</h1>
+		<div>
+			Speed : <span id="speed"></span> (キーボードu/dで変化)
+		</div>
+		<div>
+			Dir : <span id="dir"></span>（矢印キーで変化）
+		</div>
+		
+		<script  type="text/javascript">
+		var speedLabel = document.getElementById('speed');
+		var dirLabel = document.getElementById('dir');
+		var speed = 120;
+		speedLabel.innerHTML = speed;
+		
+		var ioSocket = io.connect("http://localhost:8080");
+		ioSocket.on("connect", function(){
+			console.log("connect");
+		});
+		ioSocket.on("disconnect", function(){
+			console.log("disconnect");
+		});
+
+		var buffer = new Array();
+		buffer[37] = false;
+		buffer[38] = false;
+		buffer[39] = false;
+		buffer[40] = false;
+
+		document.onkeyup = function(e){
+			console.log("key up: " + e.keyCode);
+			buffer[e.keyCode] = false;
+			if(!buffer[38] && !buffer[40] && !buffer[37] && !buffer[39]){
+				ioSocket.emit("wd4", {lspeed : 0, rspeed : 0});
+				dirLabel.innerHTML = "None" ;
+			}
+		};
+		
+		document.onkeydown = function(e){
+			buffer[e.keyCode] = true;
+			console.log("key down : " + e.keyCode);
+			if(e.keyCode == 38){ // up
+				ioSocket.emit("wd4", {lspeed : speed, rspeed : speed});
+				dirLabel.innerHTML = "↑" ;
+			} else if(e.keyCode == 40){ // down
+				ioSocket.emit("wd4", {lspeed : -speed, rspeed : -speed});
+				dirLabel.innerHTML = "↓" ;
+			} else if(e.keyCode == 37){ // left turn
+				ioSocket.emit("wd4", {lspeed : -speed, rspeed : speed});
+				dirLabel.innerHTML = "←" ;
+			} else if(e.keyCode == 39){ // right turn
+				ioSocket.emit("wd4", {lspeed : speed, rspeed : -speed});
+				dirLabel.innerHTML = "→" ;
+			} else {
+				if(e.keyCode == 85){ // 'u'
+					speed = Math.min(255, speed + 5);
+					speedLabel.innerHTML = speed;
+				} else if(e.keyCode == 68){ // 'd'
+					speed = Math.max(0, speed - 5);
+					speedLabel.innerHTML = speed;
+				}
+			}
+		};
+		</script>
+	</body>
+</html>

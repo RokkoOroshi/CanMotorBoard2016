@@ -1,0 +1,47 @@
+抵抗
+
+R1	1k	状態LED
+R2	10k	MCP2515RESETプルアップ
+R3	1k	モータ動作方向LED
+R4	4.7k	CAN通信slope
+R5	1k	モータ動作方向LED
+R6	1k	ロジック電源LED
+R7	1k	PWM入力プルダウン
+R8	10k	マイコンRESETプルアップ
+R9	1k	PWM入力プルダウン
+R10	1k	モータ電源LED
+R11	1k	状態LED
+R14	2k	モータ電源電圧検出用分圧
+R15	1k	モータ電源電圧検出用分圧
+
+1k	9個
+2k	1個
+4.7k	1個
+10k	2個
+
+コンデンサ
+
+C1	0.1uF	Arduino書き込み用DRT
+C2	0.1uF	パスコン
+C3	22pF	水晶発信器負荷
+C4	22pF	 ..
+C5	22pF	 ..
+C6	22pF	 ..
+
+0.1uF	2個
+22pF	4個
+
+その他
+ATMega328p	1個	メインマイコン
+TA8429H		2個	モータドライバ
+MCP2551		1個	CAN通信
+MCP2515		1個	CAN通信
+ACS712		2個	電流センサ（オプション的扱い）
+水晶発信器16MHz	2個
+チップLED	8個	モータ方向x4, 電源x2, 汎用x2
+ダイオード	1個	PWM入力ポートの電源逆流対策
+B2P-VH		4個	モータ、モータ電源
+B4B-ZR		1個	Arduino書き込み、シリアル通信
+B6B-ZR		1個	ISP書き込み
+B4B-PASK	2個	CAN通信
+ピンヘッダ2x3	3個	PWMIN,ADC,DIO
